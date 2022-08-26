@@ -2,42 +2,31 @@
 # PERSONALITY QUIZ
 
 from tkinter import *
-from PIL import ImageTk, Image
 
 root = Tk()
-root.title("Personality quiz")
-root.geometry("700x400")
+root.title("Movie character quiz")
+root.geometry("800x480")
+root.configure(bg="#600AEF")
+# root.resizable(False, False)
+
+main_frame = Frame(root, bg="#600AEF")
+
+# Create the starting interface
+title_spacer = Label(main_frame, bg="#600AEF")     # Pushes title text a little lower
+title_label = Label(main_frame, text="QUIZ GAME", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 48))
+description_spacer = Label(main_frame, pady=15, bg="#600AEF")       # Pushes description label a little lower
+description_label = Label(main_frame, text="Which movie character are you?", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 36))
+button_spacer = Label(main_frame, pady=35, bg="#600AEF")        # Pushes start button a little lower
+start_button = Button(main_frame, borderwidth=5, text="Start quiz", bg="#600AEF", font=("Berlin Sans FB Demi", 28), fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF")
+
+title_spacer.pack()
+title_label.pack()
+description_spacer.pack()
+description_label.pack()
+button_spacer.pack()
+start_button.pack()
 
 
-# Starting function
-def start():
-    return
-
-
-# Creation of the main frame
-main_frame = Frame(root, pady=10, padx=10)
-
-
-# Creation of the starting labels and start button
-title_font = ("Berlin Sans FB Demi", 25)
-description_label_font = ("Berlin Sans FB Demi", 21)
-start_button_font = ("Berlin Sans FB Demi", 18)
-title_label = Label(main_frame, text="Discover your personality type")
-image = ImageTk.PhotoImage(Image.open("C:/Users/ilias/Desktop/GitHub/Interactive quiz GUI/Images/1.JPG"))
-description_label = Label(main_frame, text="Get to know yourself", pady=50)
-start_button = Button(main_frame, text="Start the quiz", command=start, borderwidth=7)
-
-
-# Configuring the font and placing the starting texts on the screen
-title_label.configure(font=title_font)
-title_label.grid(row=0, column=0)
-description_label.configure(font=description_label_font)
-description_label.grid(row=1, column=0)
-start_button.configure(font=start_button_font)
-start_button.grid(row=2, column=0)
-
-
-# The main frame(title,description,start button)
 main_frame.pack()
 
 root.mainloop()
