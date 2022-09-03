@@ -10,47 +10,73 @@ root.state('zoomed')
 
 
 # Importing necessary images
-male_symbol = PhotoImage(file="images/male_symbol.png")
-female_symbol = PhotoImage(file="images/female_symbol.png")
+male_symbol = PhotoImage(file="images/first_question/male_symbol.png")
+female_symbol = PhotoImage(file="images/first_question/female_symbol.png")
 
 images = [
-    PhotoImage(file="images/diver.png"),
-    PhotoImage(file="images/actor.png"),
-    PhotoImage(file="images/salesman.png"),
+    PhotoImage(file="images/Jobs/diver.png"),
+    PhotoImage(file="images/Jobs/actor.png"),
+    PhotoImage(file="images/Jobs/salesman.png"),
+    PhotoImage(file="images/Jobs/musician.png"),
+    PhotoImage(file="images/Jobs/football.png"),
+    PhotoImage(file="images/Jobs/teacher.png"),
 
-    PhotoImage(file="images/rock_climbing.png"),
-    PhotoImage(file="images/skydiving.png"),
-    PhotoImage(file="images/knitting.png"),
+    PhotoImage(file="images/Hobbies/rock_climbing.png"),
+    PhotoImage(file="images/Hobbies/skydiving.png"),
+    PhotoImage(file="images/Hobbies/knitting.png"),
+    PhotoImage(file="images/Hobbies/dancing.png"),
+    PhotoImage(file="images/Hobbies/watching_movies.png"),
+    PhotoImage(file="images/Hobbies/shopping.png"),
 
-    PhotoImage(file="images/stallone.png"),
-    PhotoImage(file="images/brad.png"),
-    PhotoImage(file="images/bradley.png"),
+    PhotoImage(file="images/Celeb friends/Stallone.png"),
+    PhotoImage(file="images/Celeb friends/Brad.png"),
+    PhotoImage(file="images/Celeb friends/Bradley.png"),
+    PhotoImage(file="images/Celeb friends/Matthew.png"),
+    PhotoImage(file="images/Celeb friends/Jennifer.png"),
+    PhotoImage(file="images/Celeb friends/Chris.png"),
 
-    PhotoImage(file="images/audi.png"),
-    PhotoImage(file="images/bugatti.png"),
-    PhotoImage(file="images/911.png"),
+    PhotoImage(file="images/Cars/audi.png"),
+    PhotoImage(file="images/Cars/bugatti.png"),
+    PhotoImage(file="images/Cars/911.png"),
+    PhotoImage(file="images/Cars/audi s6.png"),
+    PhotoImage(file="images/Cars/porsche_carrera_s.png"),
+    PhotoImage(file="images/Cars/tesla.png"),
 
-    PhotoImage(file="images/crime.png"),
-    PhotoImage(file="images/action.png"),
-    PhotoImage(file="images/drama.png"),
+    PhotoImage(file="images/Movie genres/crime.png"),
+    PhotoImage(file="images/Movie genres/action.png"),
+    PhotoImage(file="images/Movie genres/drama.png"),
+    PhotoImage(file="images/Movie genres/musical.png"),
+    PhotoImage(file="images/Movie genres/romance.png"),
+    PhotoImage(file="images/Movie genres/sci-fi.png"),
 
-    PhotoImage(file="images/denis.png"),
-    PhotoImage(file="images/guy_ritchie.png"),
-    PhotoImage(file="images/christopher.png"),
+    PhotoImage(file="images/Directors/Denis.png"),
+    PhotoImage(file="images/Directors/Guy_ritchie.png"),
+    PhotoImage(file="images/Directors/Christopher_m.png"),
+    PhotoImage(file="images/Directors/Damien.png"),
+    PhotoImage(file="images/Directors/Christopher_n.png"),
+    PhotoImage(file="images/Directors/Cary.png"),
 
-    PhotoImage(file="images/dachshund.png"),
-    PhotoImage(file="images/labrador.png"),
-    PhotoImage(file="images/doberman.png"),
+    PhotoImage(file="images/Dogs/dachshund.png"),
+    PhotoImage(file="images/Dogs/labrador.png"),
+    PhotoImage(file="images/Dogs/doberman.png"),
+    PhotoImage(file="images/Dogs/golden_retriever.png"),
+    PhotoImage(file="images/Dogs/terrier.png"),
+    PhotoImage(file="images/Dogs/maltese.png"),
 
-    PhotoImage(file="images/shirebrook.png"),
-    PhotoImage(file="images/san_diego.png"),
-    PhotoImage(file="images/ontario.png"),
+    PhotoImage(file="images/Cities/Shirebrook.png"),
+    PhotoImage(file="images/Cities/San_Diego.png"),
+    PhotoImage(file="images/Cities/Ontario.png"),
+    PhotoImage(file="images/Cities/Arizona.png"),
+    PhotoImage(file="images/Cities/New_York.png"),
+    PhotoImage(file="images/Cities/Cuba.png"),
 
-    PhotoImage(file="images/JS_house.png"),
-    PhotoImage(file="images/TC_house.png"),
-    PhotoImage(file="images/RG_house.png"),
+    PhotoImage(file="images/Houses/JS_house.png"),
+    PhotoImage(file="images/Houses/TC_house.png"),
+    PhotoImage(file="images/Houses/RG_house.png"),
+    PhotoImage(file="images/Houses/ES_house.png"),
+    PhotoImage(file="images/Houses/AH_house.png"),
+    PhotoImage(file="images/Houses/ADA_house.png")
 ]
-
 
 questions = [       # The questions for the quiz
     "",
@@ -64,17 +90,16 @@ questions = [       # The questions for the quiz
     "Pick a city you would live in:",
 ]
 
-
 answers = [         # The answers for the quiz
     "", "", "",
-    "Diver", "Actor", "Salesman",
-    "Rock climbing", "Skydiving", "Knitting",
-    "Sylvester Stallone", "Brad Pitt", "Bradley Cooper",
-    "Audi A8", "Bugatti Veyron", "Porsche 911",
-    "Crime", "Action", "Drama",
-    "Guy Ritchie", "Christopher McQuarrie", "Denis Villeneuve",
-    "Dachshund", "Labrador", "Doberman",
-    "Shirebrook", "San Diego", "Ontario"
+    "Diver", "Actor", "Salesman", "Musician", "Footballer", "Teacher",
+    "Rock climbing", "Skydiving", "Knitting", "Dancing", "Watching movies", "Shopping",
+    "Sylvester Stallone", "Brad Pitt", "Bradley Cooper", "Matthew Mcconaughey", "Jennifer Lawrence", "Chris Evans"
+    "Audi A8", "Bugatti Veyron", "Porsche 911", "Audi S6", "Porsche carrera S", "Tesla model S",
+    "Crime", "Action", "Drama", "Musical", "Romance", "Sci-fi",
+    "Guy Ritchie", "Christopher McQuarrie", "Denis Villeneuve", "Damien Chazelle", "Christopher Nolan", "Cary Fukunaga",
+    "Dachshund", "Labrador", "Doberman", "Golden retriever", "Terrier", "Maltese",
+    "Shirebrook", "San Diego", "Ontario", "Arizona", "New York", "Cuba"
 ]
 
 x = 0       # Used to automate the printing process of the questions
