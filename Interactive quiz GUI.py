@@ -5,6 +5,7 @@ from tkinter import *
 
 root = Tk()
 root.title("Hollywood actor quiz")
+root.iconbitmap("images/mate.ico")
 root.configure(bg="#600AEF")
 root.state('zoomed')
 
@@ -14,6 +15,14 @@ male_symbol = PhotoImage(file="images/first_question/male_symbol.png")
 female_symbol = PhotoImage(file="images/first_question/female_symbol.png")
 
 images = [
+
+    PhotoImage(file="images/Sample image.png"),       # Sample images used for the first time the quiz function runs
+    PhotoImage(file="images/Sample image.png"),
+    PhotoImage(file="images/Sample image.png"),
+    PhotoImage(file="images/Sample image.png"),
+    PhotoImage(file="images/Sample image.png"),
+    PhotoImage(file="images/Sample image.png"),
+
     PhotoImage(file="images/Jobs/diver.png"),
     PhotoImage(file="images/Jobs/actor.png"),
     PhotoImage(file="images/Jobs/salesman.png"),
@@ -70,12 +79,6 @@ images = [
     PhotoImage(file="images/Cities/New_York.png"),
     PhotoImage(file="images/Cities/Cuba.png"),
 
-    PhotoImage(file="images/Houses/JS_house.png"),
-    PhotoImage(file="images/Houses/TC_house.png"),
-    PhotoImage(file="images/Houses/RG_house.png"),
-    PhotoImage(file="images/Houses/ES_house.png"),
-    PhotoImage(file="images/Houses/AH_house.png"),
-    PhotoImage(file="images/Houses/ADA_house.png")
 ]
 
 questions = [       # The questions for the quiz
@@ -91,71 +94,182 @@ questions = [       # The questions for the quiz
 ]
 
 answers = [         # The answers for the quiz
-    "", "", "",
+    "", "", "", "", "", "",
     "Diver", "Actor", "Salesman", "Musician", "Footballer", "Teacher",
     "Rock climbing", "Skydiving", "Knitting", "Dancing", "Watching movies", "Shopping",
-    "Sylvester Stallone", "Brad Pitt", "Bradley Cooper", "Matthew Mcconaughey", "Jennifer Lawrence", "Chris Evans"
+    "Sylvester Stallone", "Brad Pitt", "Bradley Cooper", "Matthew Mcconaughey", "Jennifer Lawrence", "Chris Evans",
     "Audi A8", "Bugatti Veyron", "Porsche 911", "Audi S6", "Porsche carrera S", "Tesla model S",
     "Crime", "Action", "Drama", "Musical", "Romance", "Sci-fi",
-    "Guy Ritchie", "Christopher McQuarrie", "Denis Villeneuve", "Damien Chazelle", "Christopher Nolan", "Cary Fukunaga",
+    "Denis Villeneuve", "Guy Ritchie", "Christopher McQuarrie", "Damien Chazelle", "Christopher Nolan", "Cary Fukunaga",
     "Dachshund", "Labrador", "Doberman", "Golden retriever", "Terrier", "Maltese",
     "Shirebrook", "San Diego", "Ontario", "Arizona", "New York", "Cuba"
 ]
 
+# Images for the last question
+last_question_images = [
+    PhotoImage(file="images/Houses/JS_house.png"),
+    PhotoImage(file="images/Houses/TC_house.png"),
+    PhotoImage(file="images/Houses/RG_house.png"),
+    PhotoImage(file="images/Houses/ES_house.png"),
+    PhotoImage(file="images/Houses/AH_house.png"),
+    PhotoImage(file="images/Houses/ADA_house.png")
+]
+
 x = 0       # Used to automate the printing process of the questions
 y = 0       # Used to automate the printing process of the answers of each question
-z = 0       # Used to automate the printing process of the images
 
 
-def previous():     # Goes back to the previous question
+# The last question that doesn't have buttons under the images
+def last_question():
+    title_spacer = Label(root, bg="#600AEF")
+    title_spacer.grid(row=0, column=0, columnspan=3)
+    question = Label(root, text="Pick a house you would live in:", bg="#600AEF", fg="#FFFF00",
+                     font=("Berlin Sans FB Demi", 53))
+    question.grid(row=1, column=0, columnspan=3)
+    radiobutton_spacer = Label(root, pady=20, bg="#600AEF")
+    radiobutton_spacer.grid(row=2, column=0, columnspan=3)
+    global answer
+    answer = StringVar()
+
+    # First column
+    Radiobutton(root, image=last_question_images[0], variable=answer, value="male", bg="#600AEF",
+                selectcolor="#4507AB", fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                indicatoron=False, borderwidth=4) \
+        .grid(row=3, column=0)
+
+    Radiobutton(root, image=last_question_images[1], variable=answer, value="female",
+                selectcolor="#4507AB", bg="#600AEF", fg="#FFFF00", activebackground="#FFFF00",
+                activeforeground="#600AEF", indicatoron=False, borderwidth=4) \
+        .grid(row=4, column=0)
+
+    radiobutton_spacer_2 = Label(root, pady=10, bg="#600AEF")
+    radiobutton_spacer_2.grid(row=5, column=0, columnspan=3)
+
+    # Second column
+    Radiobutton(root, image=last_question_images[2], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                indicatoron=False, borderwidth=4) \
+        .grid(row=3, column=1)
+
+    Radiobutton(root, image=last_question_images[3], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                indicatoron=False, borderwidth=4) \
+        .grid(row=4, column=1)
+
+    # Third column
+    Radiobutton(root, image=last_question_images[4], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                indicatoron=False, borderwidth=4) \
+        .grid(row=3, column=2)
+
+    Radiobutton(root, image=last_question_images[5], variable=answer, value="male", bg="#600AEF",
+                selectcolor="#4507AB", fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                indicatoron=False, borderwidth=4) \
+        .grid(row=4, column=2)
+
+
+# Goes back to the previous question
+def previous():
     global x
     x = x - 1
     global y
-    y = y - 3
-    global z
-    z = z - 6
+    y = y - 6
     for widget in root.winfo_children():  # Clears the main window to print the next question
         widget.grid_forget()
     root.grid_columnconfigure(0, weight=1)
     root.grid_columnconfigure(1, weight=1)
+    root.grid_columnconfigure(2, weight=1)
+
     title_spacer = Label(root, bg="#600AEF")
-    title_spacer.grid(row=0, column=0, columnspan=2)
+    title_spacer.grid(row=0, column=0, columnspan=3)
     question = Label(root, text=questions[x], bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 53))
-    question.grid(row=1, column=0, columnspan=2)
+    question.grid(row=1, column=0, columnspan=3)
     radiobutton_spacer = Label(root, pady=20, bg="#600AEF")
-    radiobutton_spacer.grid(row=2, column=0, columnspan=2)
+    radiobutton_spacer.grid(row=2, column=0, columnspan=3)
     global answer
     answer = StringVar()
-    Radiobutton(root, image=images[0], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
-                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
-                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
-        .grid(row=3, column=0, sticky=W, padx=130)
 
-    Radiobutton(root, text=answers[y + 1], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+    # First column
+    Radiobutton(root, image=images[y], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
                 fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
                 font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
-        .grid(row=4, column=0, sticky=W, padx=130, pady=5)
+        .grid(row=3, column=0)
 
-    Radiobutton(root, text=answers[y + 2], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+    Radiobutton(root, text=answers[y], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
                 fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
                 font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
-        .grid(row=3, column=1, sticky=N, padx=50)
+        .grid(row=4, column=0)
+
+    radiobutton_spacer_2 = Label(root, pady=10, bg="#600AEF")
+    radiobutton_spacer_2.grid(row=5, column=0, columnspan=3)
+
+    Radiobutton(root, image=images[y + 1], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
+        .grid(row=6, column=0)
+
+    Radiobutton(root, text=answers[y + 1], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
+        .grid(row=7, column=0)
+
+    # Second column
+    Radiobutton(root, image=images[y + 2], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
+        .grid(row=3, column=1)
+
+    Radiobutton(root, text=answers[y + 2], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
+        .grid(row=4, column=1)
+
+    Radiobutton(root, image=images[y + 3], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
+        .grid(row=6, column=1)
+
+    Radiobutton(root, text=answers[y + 3], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
+        .grid(row=7, column=1)
+
+    # Third column
+    Radiobutton(root, image=images[y + 4], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
+        .grid(row=3, column=2)
+
+    Radiobutton(root, text=answers[y + 4], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
+        .grid(row=4, column=2)
+
+    Radiobutton(root, image=images[y + 5], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
+        .grid(row=6, column=2)
+
+    Radiobutton(root, text=answers[y + 5], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+                fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4) \
+        .grid(row=7, column=2)
 
     next_button = Button(root, text="Next question", bg="#600AEF", fg="#FFFF00", activebackground="#FFFF00",
-                         activeforeground="#600AEF", font=("Berlin Sans FB Demi", 28), borderwidth=6, command=quiz)
-    next_button.grid(row=6, column=1, sticky=E, padx=20, pady=196)
+                         activeforeground="#600AEF", font=("Berlin Sans FB Demi", 20), borderwidth=6, command=quiz)
+    next_button.grid(row=8, column=2, sticky=SE, pady=120, padx=5)
 
     if x == 1:
         previous_button = Button(root, text="Previous question", bg="#600AEF", fg="#FFFF00",
                                  activebackground="#FFFF00", activeforeground="#600AEF",
-                                 font=("Berlin Sans FB Demi", 28), borderwidth=6, command=question_1)
-        previous_button.grid(row=6, column=0, padx=20, sticky=W)
+                                 font=("Berlin Sans FB Demi", 20), borderwidth=6, command=first_question)
+        previous_button.grid(row=8, column=0, sticky=SW, pady=120, padx=5)
 
     else:
         previous_button = Button(root, text="Previous question", bg="#600AEF", fg="#FFFF00",
                                  activebackground="#FFFF00", activeforeground="#600AEF",
-                                 font=("Berlin Sans FB Demi", 28), borderwidth=6, command=previous)
-        previous_button.grid(row=6, column=0, padx=20, sticky=W)
+                                 font=("Berlin Sans FB Demi", 20), borderwidth=6, command=previous)
+        previous_button.grid(row=8, column=0, sticky=SW, pady=120, padx=5)
 
 
 def quiz():     # Prints the rest of the quiz's questions
@@ -163,78 +277,133 @@ def quiz():     # Prints the rest of the quiz's questions
         global x
         x = x + 1
         global y
-        y = y + 3
-        global z
-        z = z + 6
+        y = y + 6
         for widget in root.winfo_children():        # Clears the main window to print the next question
             widget.grid_forget()
         root.grid_columnconfigure(0, weight=1)
         root.grid_columnconfigure(1, weight=1)
+        root.grid_columnconfigure(2, weight=1)
+
         title_spacer = Label(root, bg="#600AEF")
-        title_spacer.grid(row=0, column=0, columnspan=2)
+        title_spacer.grid(row=0, column=0, columnspan=3)
         question = Label(root, text=questions[x], bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 53))
-        question.grid(row=1, column=0, columnspan=2)
+        question.grid(row=1, column=0, columnspan=3)
         radiobutton_spacer = Label(root, pady=20, bg="#600AEF")
-        radiobutton_spacer.grid(row=2, column=0, columnspan=2)
+        radiobutton_spacer.grid(row=2, column=0, columnspan=3)
         global answer
         answer = StringVar()
-        Radiobutton(root, image=images[0], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
-                    fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
-                    font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4)\
-            .grid(row=3, column=0, sticky=W, padx=130)
 
-        Radiobutton(root, text=answers[y + 1], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+        # First column
+        Radiobutton(root, image=images[y], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
                     fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
-                    font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4)\
-            .grid(row=4, column=0, sticky=W, padx=130, pady=5)
+                    indicatoron=False, borderwidth=4)\
+            .grid(row=3, column=0)
 
-        Radiobutton(root, image=images[0], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+        Radiobutton(root, text=answers[y], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
                     fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
                     font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4)\
-            .grid(row=3, column=0, sticky=W, padx=130)
+            .grid(row=4, column=0)
 
-        Radiobutton(root, text=answers[y + 2], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+        radiobutton_spacer_2 = Label(root, pady=10, bg="#600AEF")
+        radiobutton_spacer_2.grid(row=5, column=0, columnspan=3)
+
+        Radiobutton(root, image=images[y + 1], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                    fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                    indicatoron=False, borderwidth=4)\
+            .grid(row=6, column=0)
+
+        Radiobutton(root, text=answers[y + 1], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
                     fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
                     font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4)\
-            .grid(row=3, column=1, sticky=N, padx=50)
+            .grid(row=7, column=0)
+
+
+        # Second column
+        Radiobutton(root, image=images[y + 2], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                    fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                    indicatoron=False, borderwidth=4)\
+            .grid(row=3, column=1)
+
+        Radiobutton(root, text=answers[y + 2], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+                    fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                    font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4)\
+            .grid(row=4, column=1)
+
+        Radiobutton(root, image=images[y + 3], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                    fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                    indicatoron=False, borderwidth=4)\
+            .grid(row=6, column=1)
+
+        Radiobutton(root, text=answers[y + 3], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+                    fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                    font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4)\
+            .grid(row=7, column=1)
+
+
+        # Third column
+        Radiobutton(root, image=images[y + 4], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                    fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                    indicatoron=False, borderwidth=4)\
+            .grid(row=3, column=2)
+
+        Radiobutton(root, text=answers[y + 4], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+                    fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                    font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4)\
+            .grid(row=4, column=2)
+
+        Radiobutton(root, image=images[y + 5], variable=answer, value="male", bg="#600AEF", selectcolor="#4507AB",
+                    fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                    indicatoron=False, borderwidth=4)\
+            .grid(row=6, column=2)
+
+        Radiobutton(root, text=answers[y + 5], variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
+                    fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                    font=("Berlin Sans FB Demi", 23), indicatoron=False, borderwidth=4)\
+            .grid(row=7, column=2)
+
+
+
 
         next_button = Button(root, text="Next question", bg="#600AEF", fg="#FFFF00", activebackground="#FFFF00",
-                             activeforeground="#600AEF", font=("Berlin Sans FB Demi", 28), borderwidth=6, command=quiz)
-        next_button.grid(row=6, column=1, sticky=E, padx=25, pady=350)
+                             activeforeground="#600AEF", font=("Berlin Sans FB Demi", 20), borderwidth=6, command=quiz)
+        next_button.grid(row=8, column=2, sticky=SE, pady=120, padx=5)
 
         if x == 1:
             previous_button = Button(root, text="Previous question", bg="#600AEF", fg="#FFFF00",
                                      activebackground="#FFFF00", activeforeground="#600AEF",
-                                     font=("Berlin Sans FB Demi", 28), borderwidth=6, command=question_1)
-            previous_button.grid(row=6, column=0, padx=20, sticky=W)
+                                     font=("Berlin Sans FB Demi", 20), borderwidth=6, command=first_question)
+            previous_button.grid(row=8, column=0, sticky=SW, pady=120, padx=5)
 
         else:
             previous_button = Button(root, text="Previous question", bg="#600AEF", fg="#FFFF00",
                                      activebackground="#FFFF00", activeforeground="#600AEF",
-                                     font=("Berlin Sans FB Demi", 28), borderwidth=6, command=previous)
-            previous_button.grid(row=6, column=0, padx=20, sticky=W)
+                                     font=("Berlin Sans FB Demi", 20), borderwidth=6, command=previous)
+            previous_button.grid(row=8, column=0, sticky=SW, pady=120, padx=5)
 
-    except IndexError:      # Doubles as the ending/results interface
-        label = Label(root, text="End", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 53))
-        label.grid(row=0, column=0, columnspan=2)
+    # Initiates the final question when it finishes with all the other questions
+    except IndexError:
+        last_question()
 
 
-def question_1():       # Specific function for the first question
+# Specific function for the first question
+def first_question():
+    # Resets the variables to start counting from the start
     global x
     x = 0
     global y
     y = 0
     global z
     z = 0
-    for widget in root.winfo_children():        # Clears the main window to print the next question
+    # Clears the main window to print the next question
+    for widget in root.winfo_children():
         widget.grid_forget()
     root.grid_columnconfigure(0, weight=1)
     root.grid_columnconfigure(1, weight=1)
+    root.grid_columnconfigure(2, weight=1)
     title_spacer = Label(root, bg="#600AEF")
-    title_spacer.grid(row=0, column=0, columnspan=2)
+    title_spacer.grid(row=0, column=0, columnspan=3)
     question = Label(root, text="Are you male or female?", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 53))
-    root.grid_columnconfigure(0, weight=1)
-    question.grid(row=1, column=0, columnspan=2)
+    question.grid(row=1, column=0, columnspan=3)
     radiobutton_spacer = Label(root, pady=30, bg="#600AEF")
     radiobutton_spacer.grid(row=3, column=1)
     global answer
@@ -253,18 +422,18 @@ def question_1():       # Specific function for the first question
     Radiobutton(root, image=female_symbol, variable=answer, value="female", selectcolor="#4507AB", bg="#600AEF",
                 fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF", font=("Berlin Sans FB Demi", 32),
                 indicatoron=False, borderwidth=8)\
-        .grid(row=4, column=1, padx=137)
+        .grid(row=4, column=2, padx=137)
 
     Radiobutton(root, text="Female", variable=answer, value="female", bg="#600AEF", selectcolor="#4507AB", fg="#FFFF00",
                 activebackground="#FFFF00", activeforeground="#600AEF", font=("Berlin Sans FB Demi", 32),
                 indicatoron=False, borderwidth=8)\
-        .grid(row=5, column=1, padx=137, ipadx=1)
+        .grid(row=5, column=2, padx=137, ipadx=1)
 
-    next_button_spacer = Label(root, pady=131, bg="#600AEF")
-    next_button_spacer.grid(row=6, column=1)
+    next_button_spacer = Label(root, pady=153, bg="#600AEF")
+    next_button_spacer.grid(row=6, column=2)
     next_button = Button(root, text="Next question", bg="#600AEF", fg="#FFFF00", activebackground="#FFFF00",
-                         activeforeground="#600AEF", font=("Berlin Sans FB Demi", 28), borderwidth=6, command=quiz)
-    next_button.grid(row=7, column=1, padx=25, sticky=SE)
+                         activeforeground="#600AEF", font=("Berlin Sans FB Demi", 20), borderwidth=6, command=quiz)
+    next_button.grid(row=7, column=2, padx=5, sticky=SE)
 
 
 def starting_interface():  # Create the starting interface
@@ -277,7 +446,7 @@ def starting_interface():  # Create the starting interface
                               font=("Berlin Sans FB Demi", 40))
     button_spacer = Label(root, pady=35, bg="#600AEF")  # Pushes start button a little lower
     start_button = Button(root, borderwidth=8, text="Start quiz", bg="#600AEF", font=("Berlin Sans FB Demi", 35),
-                          fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF", command=question_1)
+                          fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF", command=first_question)
 
     title_spacer.grid(row=0, columnspan=2, pady=20)
     title_label.grid(row=1, columnspan=2)
