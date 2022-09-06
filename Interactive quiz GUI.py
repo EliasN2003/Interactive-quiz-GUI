@@ -16,7 +16,8 @@ female_symbol = PhotoImage(file="images/first_question/female_symbol.png")
 
 images = [
 
-    PhotoImage(file="images/Sample image.png"),       # Sample images used for the first time the quiz function runs
+    # Sample images used for the first time the quiz function runs
+    PhotoImage(file="images/Sample image.png"),
     PhotoImage(file="images/Sample image.png"),
     PhotoImage(file="images/Sample image.png"),
     PhotoImage(file="images/Sample image.png"),
@@ -78,8 +79,28 @@ images = [
     PhotoImage(file="images/Cities/Arizona.png"),
     PhotoImage(file="images/Cities/New_York.png"),
     PhotoImage(file="images/Cities/Cuba.png"),
-
 ]
+
+# Images for the last question
+last_question_images = [
+    PhotoImage(file="images/Houses/JS_house.png"),
+    PhotoImage(file="images/Houses/TC_house.png"),
+    PhotoImage(file="images/Houses/RG_house.png"),
+    PhotoImage(file="images/Houses/ES_house.png"),
+    PhotoImage(file="images/Houses/AH_house.png"),
+    PhotoImage(file="images/Houses/ADA_house.png")
+]
+
+# Images for the results page
+results_images = [
+    PhotoImage(file="images/Actors/Statham.png"),
+    PhotoImage(file="images/Actors/Tom.png"),
+    PhotoImage(file="images/Actors/Ryan.png"),
+    PhotoImage(file="images/Actors/Emma.png"),
+    PhotoImage(file="images/Actors/Anne.png"),
+    PhotoImage(file="images/Actors/Ana.png"),
+]
+
 
 # The questions for the quiz
 questions = [
@@ -107,14 +128,14 @@ answers = [
     "Shirebrook", "San Diego", "Ontario", "Arizona", "New York", "Cuba"
 ]
 
-# Images for the last question
-last_question_images = [
-    PhotoImage(file="images/Houses/JS_house.png"),
-    PhotoImage(file="images/Houses/TC_house.png"),
-    PhotoImage(file="images/Houses/RG_house.png"),
-    PhotoImage(file="images/Houses/ES_house.png"),
-    PhotoImage(file="images/Houses/AH_house.png"),
-    PhotoImage(file="images/Houses/ADA_house.png")
+# Used when printing the actor in the results page
+actors_names = [
+    "Jason Statham",
+    "Tom Cruise",
+    "Ryan Gosling",
+    "Emma Stone",
+    "Anne Hathaway",
+    "Ana De Armas"
 ]
 
 # Stores the key for each answer
@@ -122,7 +143,6 @@ answers_variables = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 x = 0       # Used to automate the printing process of the questions
 y = 0       # Used to automate the printing process of the answers of each question
-
 
 # The variable used to hold the answers
 answer = IntVar()
@@ -139,8 +159,23 @@ def results():
     # Clears the main window to print the results page
     for widget in root.winfo_children():
         widget.grid_forget()
-    label = Label(root, text=str(answers_variables), bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 10))
-    label.grid(row=0, column=0)
+    root.grid_columnconfigure(0, weight=1)
+    root.grid_columnconfigure(1, weight=1)
+    # Pushes title text lower
+    title = Label(root, text="QUIZ COMPLETED!", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 65))
+    title_spacer = Label(root, bg="#600AEF")
+    description = Label(root, text="You are:", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 40))
+    actor_image = Label(root, image=results_images[0], relief=SOLID, borderwidth=7)
+    actor_name = Label(root, text=actors_names[0], font=("Berlin Sans FB Demi", 40), bg="#600AEF", fg="#FFFF00")
+    play_again = Button(root, borderwidth=8, text="Play again?", bg="#600AEF", font=("Berlin Sans FB Demi", 27),
+                        fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF")
+
+    title.grid(row=0, column=0, columnspan=3, pady=20)
+    title_spacer.grid(row=1, column=0, columnspan=3, pady=30)
+    description.grid(row=2, column=0, columnspan=3, pady=5)
+    actor_image.grid(row=3, column=0, columnspan=3)
+    actor_name.grid(row=4, column=0, columnspan=3)
+    play_again.grid(row=5, column=0, columnspan=3, pady=80)
 
 
 # The last question that doesn't have buttons under the images
@@ -487,13 +522,13 @@ def first_question():
 def starting_interface():
     root.grid_columnconfigure(0, weight=1)
     root.grid_columnconfigure(1, weight=1)
-    # Pushes title text a little lower
+    # Pushes title text lower
     title_spacer = Label(root, bg="#600AEF")
     title_label = Label(root, text="QUIZ GAME", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 65))
     description_spacer = Label(root, pady=25, bg="#600AEF")  # Pushes description label lower
     description_label = Label(root, text="Which Hollywood actor are you?", bg="#600AEF", fg="#FFFF00",
                               font=("Berlin Sans FB Demi", 40))
-    button_spacer = Label(root, pady=35, bg="#600AEF")  # Pushes start button a little lower
+    button_spacer = Label(root, pady=35, bg="#600AEF")  # Pushes start button lower
     start_button = Button(root, borderwidth=8, text="Start quiz", bg="#600AEF", font=("Berlin Sans FB Demi", 35),
                           fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF", command=first_question)
 
