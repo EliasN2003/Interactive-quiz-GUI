@@ -173,7 +173,8 @@ def results():
         actor_image = Label(root, image=results_images[value], relief=SOLID, borderwidth=7)
         actor_name = Label(root, text=actors_names[value], font=("Berlin Sans FB Demi", 40), bg="#600AEF", fg="#FFFF00")
         play_again = Button(root, borderwidth=8, text="Play again?", bg="#600AEF", font=("Berlin Sans FB Demi", 27),
-                            fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF")
+                            fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
+                            command=starting_interface)
 
         title.grid(row=0, column=0, columnspan=3, pady=20)
         title_spacer.grid(row=1, column=0, columnspan=3, pady=30)
@@ -545,6 +546,9 @@ def quiz():     # Prints the rest of the quiz's questions
 
 # Specific function for the first question
 def first_question():
+    # Clears the main window to print the results page
+    for widget in root.winfo_children():
+        widget.grid_forget()
     # Resets the variables to start counting from the start
     global x
     x = 0
@@ -593,24 +597,28 @@ def first_question():
 
 # Creates the starting interface
 def starting_interface():
+    # Clears the main window to print the results page
+    for widget in root.winfo_children():
+        widget.grid_forget()
     root.grid_columnconfigure(0, weight=1)
     root.grid_columnconfigure(1, weight=1)
+    root.grid_columnconfigure(2, weight=1)
     # Pushes title text lower
     title_spacer = Label(root, bg="#600AEF")
-    title_label = Label(root, text="QUIZ GAME", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 65))
+    title = Label(root, text="QUIZ GAME", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 70))
     description_spacer = Label(root, pady=25, bg="#600AEF")  # Pushes description label lower
-    description_label = Label(root, text="Which Hollywood actor are you?", bg="#600AEF", fg="#FFFF00",
-                              font=("Berlin Sans FB Demi", 40))
+    description = Label(root, text="Which Hollywood actor are you?", bg="#600AEF", fg="#FFFF00",
+                              font=("Berlin Sans FB Demi", 50))
     button_spacer = Label(root, pady=35, bg="#600AEF")  # Pushes start button lower
-    start_button = Button(root, borderwidth=8, text="Start quiz", bg="#600AEF", font=("Berlin Sans FB Demi", 35),
+    start_button = Button(root, borderwidth=8, text="Start quiz", bg="#600AEF", font=("Berlin Sans FB Demi", 40),
                           fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF", command=first_question)
 
-    title_spacer.grid(row=0, columnspan=2, pady=20)
-    title_label.grid(row=1, columnspan=2)
-    description_spacer.grid(row=2, columnspan=2)
-    description_label.grid(row=3, columnspan=2, padx=99)
-    button_spacer.grid(row=4, columnspan=2, pady=50)
-    start_button.grid(row=5, columnspan=2)
+    title_spacer.grid(row=0, columnspan=3, pady=55)
+    title.grid(row=1, columnspan=3)
+    description_spacer.grid(row=2, columnspan=3)
+    description.grid(row=3, columnspan=3, padx=99)
+    button_spacer.grid(row=4, columnspan=3, pady=50)
+    start_button.grid(row=5, columnspan=3)
 
 
 # Runs the starting interface
