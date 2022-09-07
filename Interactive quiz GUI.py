@@ -606,16 +606,17 @@ def starting_interface():
     # Pushes title text lower
     title_spacer = Label(root, bg="#600AEF")
     title = Label(root, text="QUIZ GAME", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 70))
-    description_spacer = Label(root, pady=25, bg="#600AEF")  # Pushes description label lower
+    # Pushes description label lower
+    description_spacer = Label(root, bg="#600AEF")
     description = Label(root, text="Which Hollywood actor are you?", bg="#600AEF", fg="#FFFF00",
-                              font=("Berlin Sans FB Demi", 50))
-    button_spacer = Label(root, pady=35, bg="#600AEF")  # Pushes start button lower
+                        font=("Berlin Sans FB Demi", 50))
+    button_spacer = Label(root, pady=27, bg="#600AEF")  # Pushes start button lower
     start_button = Button(root, borderwidth=8, text="Start quiz", bg="#600AEF", font=("Berlin Sans FB Demi", 40),
                           fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF", command=first_question)
 
-    title_spacer.grid(row=0, columnspan=3, pady=55)
+    title_spacer.grid(row=0, columnspan=3, pady=40)
     title.grid(row=1, columnspan=3)
-    description_spacer.grid(row=2, columnspan=3)
+    description_spacer.grid(row=2, columnspan=3, pady=35)
     description.grid(row=3, columnspan=3, padx=99)
     button_spacer.grid(row=4, columnspan=3, pady=50)
     start_button.grid(row=5, columnspan=3)
