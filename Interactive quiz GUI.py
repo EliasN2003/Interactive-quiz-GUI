@@ -2,6 +2,8 @@
 # PERSONALITY QUIZ
 
 from tkinter import *
+from collections import Counter
+import random
 
 root = Tk()
 root.title("Hollywood actor quiz")
@@ -159,23 +161,94 @@ def results():
     # Clears the main window to print the results page
     for widget in root.winfo_children():
         widget.grid_forget()
-    root.grid_columnconfigure(0, weight=1)
-    root.grid_columnconfigure(1, weight=1)
-    # Pushes title text lower
-    title = Label(root, text="QUIZ COMPLETED!", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 65))
-    title_spacer = Label(root, bg="#600AEF")
-    description = Label(root, text="You are:", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 40))
-    actor_image = Label(root, image=results_images[0], relief=SOLID, borderwidth=7)
-    actor_name = Label(root, text=actors_names[0], font=("Berlin Sans FB Demi", 40), bg="#600AEF", fg="#FFFF00")
-    play_again = Button(root, borderwidth=8, text="Play again?", bg="#600AEF", font=("Berlin Sans FB Demi", 27),
-                        fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF")
 
-    title.grid(row=0, column=0, columnspan=3, pady=20)
-    title_spacer.grid(row=1, column=0, columnspan=3, pady=30)
-    description.grid(row=2, column=0, columnspan=3, pady=5)
-    actor_image.grid(row=3, column=0, columnspan=3)
-    actor_name.grid(row=4, column=0, columnspan=3)
-    play_again.grid(row=5, column=0, columnspan=3, pady=80)
+    # Method to print the correct actor in the results interface
+    def result(value):
+        root.grid_columnconfigure(0, weight=1)
+        root.grid_columnconfigure(1, weight=1)
+        # Pushes title text lower
+        title = Label(root, text="QUIZ COMPLETED!", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 65))
+        title_spacer = Label(root, bg="#600AEF")
+        description = Label(root, text="You are:", bg="#600AEF", fg="#FFFF00", font=("Berlin Sans FB Demi", 40))
+        actor_image = Label(root, image=results_images[value], relief=SOLID, borderwidth=7)
+        actor_name = Label(root, text=actors_names[value], font=("Berlin Sans FB Demi", 40), bg="#600AEF", fg="#FFFF00")
+        play_again = Button(root, borderwidth=8, text="Play again?", bg="#600AEF", font=("Berlin Sans FB Demi", 27),
+                            fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF")
+
+        title.grid(row=0, column=0, columnspan=3, pady=20)
+        title_spacer.grid(row=1, column=0, columnspan=3, pady=30)
+        description.grid(row=2, column=0, columnspan=3, pady=5)
+        actor_image.grid(row=3, column=0, columnspan=3)
+        actor_name.grid(row=4, column=0, columnspan=3)
+        play_again.grid(row=5, column=0, columnspan=3, pady=80)
+
+    if answers_variables[0] == 7:
+        # Stores the variables for comparison
+        numbers_list = []
+        # Counts how many times the answers have been selected
+        one = answers_variables.count(1)
+        two = answers_variables.count(2)
+        three = answers_variables.count(3)
+        # Stores the variables in the list if they have been selected at least once
+        if one > 0:
+            numbers_list.append(0)
+        if two > 0:
+            numbers_list.append(1)
+        if three > 0:
+            numbers_list.append(2)
+        # Prints the actor that you have the most similarities with
+        if one > two and one > three:
+            result(0)
+
+        elif two > one and two > three:
+            result(1)
+
+        elif three > one and three > two:
+            result(2)
+
+        # Prints an actor of the opposite gender if no actors of the same gender have been selected
+        elif one + two + three == 0:
+            my_counter = Counter(answers_variables)
+            result(int((my_counter.most_common(1)[0][0]) - 1))
+
+        # Prints an actor at random if they have the same number of answers
+        else:
+            choice = int(random.choice(numbers_list))
+            result(choice)
+
+    elif answers_variables[0] == 8:
+        # Stores the variables for comparison
+        numbers_list = []
+        # Counts how many times the answers have been selected
+        four = answers_variables.count(4)
+        five = answers_variables.count(5)
+        six = answers_variables.count(6)
+        # Stores the variables in the list if they have been selected at least once
+        if four > 0:
+            numbers_list.append(3)
+        if five > 0:
+            numbers_list.append(4)
+        if six > 0:
+            numbers_list.append(5)
+        # Prints the actor that you have the most similarities with
+        if four > five and four > six:
+            result(3)
+
+        elif five > four and five > six:
+            result(4)
+
+        elif six > four and six > five:
+            result(5)
+
+        # Prints an actor of the opposite gender if no actors of the same gender have been selected
+        elif four + five + six == 0:
+            my_counter = Counter(answers_variables)
+            result(int((my_counter.most_common(1)[0][0]) - 1))
+
+        # Prints an actor at random if they have the same number of answers
+        else:
+            choice = int(random.choice(numbers_list))
+            result(choice)
 
 
 # The last question that doesn't have buttons under the images
@@ -546,6 +619,5 @@ starting_interface()
 root.mainloop()
 
 # Comments:
-# Change icon
-# Get rid of global var (line 22)
 # Maybe use classes in the future?
+# Fix buttons staying pressed
