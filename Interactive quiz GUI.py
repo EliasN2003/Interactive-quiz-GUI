@@ -268,7 +268,7 @@ def last_question():
     # First column
     Radiobutton(root, image=last_question_images[0], variable=answer, value=1, bg="#600AEF",
                 selectcolor="#4507AB", fg="#FFFF00", activebackground="#FFFF00", activeforeground="#600AEF",
-                indicatoron=False, borderwidth=4, command=lambda: answer.get()) \
+                indicatoron=False, borderwidth=4, command=lambda: save_variable(answer.get())) \
         .grid(row=3, column=0)
 
     Radiobutton(root, image=last_question_images[1], variable=answer, value=2,
